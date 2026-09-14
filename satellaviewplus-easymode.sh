@@ -1,8 +1,10 @@
 #!/bin/bash
+# Necessary to stop Qt-Raster weirdness in Wayland.
+export QT_QPA_PLATFORM=xcb
 # Get script directory.
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# Define emulator location. Since this is easymode, we're only going to use bsnes-plus here.
 EMULATOR="default/bsnes-plus/bsnes"
-export QT_QPA_PLATFORM=xcb
 
 # Check for Satellaview+
 if [ -e "$SCRIPT_DIR"/Satellaview+.appimage ]
@@ -36,20 +38,19 @@ echo ""$SCRIPT_DIR"/Satellaview+.appimage"
 cd "$SCRIPT_DIR"
 "$SCRIPT_DIR"/Satellaview+.appimage &
 
-# Wait until bs-x.sfc is available.
-# If setup went correctly, Satellaview+ will download the RetroArch version, which includes the vaunted bs-x.sfc that's included into the satdata.
-# Using any other method will cause the program to delete BS-X.sfc everytime and allows us to not use RetroArch.
+# Wait until the satdata directory is available.
 until [ -e "$SCRIPT_DIR"/satdata ]; do
     sleep 1
 done
 
+# Grab BS-X.sfc from the Satellaview+ site. Debating on whether it'd be better to just put it in the repository.
 if [ -e "$SCRIPT_DIR"/BS-X.sfc ]
 then
     echo "BS-X rom file exists. Continuing."
 else
     curl -L "https://satellaview-plus.com/client/BS-X.zip" --output "$SCRIPT_DIR"/BS-X.zip
     unzip BS-X.zip
-    rm "$SCRIPT_DIR"/BZ-X.zip
+    rm "$SCRIPT_DIR"/BS-X.zip
 fi
 
 ln -s "$SCRIPT_DIR"/satdata "$SCRIPT_DIR"/default/bsnes-plus/bsxdat
@@ -57,6 +58,7 @@ ln -s "$SCRIPT_DIR"/satdata "$SCRIPT_DIR"/default/bsnes-plus/bsxdat
 echo "Beginning boot up for BS-X..."
 echo "$EMULATOR" ./roms/bs-x/bs-x.sfc
 echo "Attempting "$SCRIPT_DIR"/$EMULATOR ./BS-X.sfc..."
+# Ensure that bsnes-plus is actually executable before we actually launch
 chmod +x "$SCRIPT_DIR"/default/bsnes-plus/bsnes
 # sh -c "cd "$SCRIPT_DIR"/default/bsnes-plus && LD_LIBRARY_PATH=libs "$SCRIPT_DIR"$EMULATOR "$SCRIPT_DIR/roms/bs-x/bs-x.sfc""
 LD_LIBRARY_PATH="$SCRIPT_DIR"/default/bsnes-plus/libs "$SCRIPT_DIR"/default/bsnes-plus/bsnes -bs "$SCRIPT_DIR/BS-X.sfc"
