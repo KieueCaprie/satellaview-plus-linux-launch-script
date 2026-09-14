@@ -18,3 +18,6 @@ A launch script created specifically for launching Satellaview + (https://satell
 TODO:
 - Figure out how to get the most up-to-date Linux client for Satellaview+ in case of future updates. Current script downloads V5.
 - Compile SNES9x in an AMD64 environment, somehow.
+
+# Human statement
+No generative AI was used in any step of the process. This script was built with blood, sweat, and tears. Mostly tears (mine), lot of tears. So many tears.
