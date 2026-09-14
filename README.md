@@ -20,4 +20,4 @@ TODO:
 - Compile SNES9x in an AMD64 environment, somehow.
 
 # Human statement
-No generative AI was used in any step of the process. This script was built with blood, sweat, and tears. Mostly tears (mine), lot of tears. So many tears.
+No generative AI was used in any step of the process and it will stay that way. This script was built with blood, sweat, and tears. Mostly tears (mine), lot of tears. So many tears.
