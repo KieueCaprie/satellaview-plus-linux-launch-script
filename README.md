@@ -3,7 +3,10 @@
 A launch script created specifically for launching Satellaview + (https://satellaview-plus.com) and BS-X in an emulator of your choice. The script defaults to the basic SNES9x appimage if there are none defined (https://github.com/snes9xgit/snes9x).
 
 # Currently supports
-- Linux - Tested on ArchLinux (tested on EndeavourOS), and SteamOS. This will probably work on most, if not all, popular distros.
+- Linux - Tested on ArchLinux (tested on EndeavourOS).
+
+# Known issues
+* AMD64 devices cannot launch SNES9x, rendering the script useless.
 
 # How to use
 1. Download the repository by using ```git clone https://github.com/KieueCaprie/satellaview--linux-launch-script.git``` or by clicking on Code in the main Github page and clicking "Download ZIP".
@@ -14,3 +17,4 @@ A launch script created specifically for launching Satellaview + (https://satell
 
 TODO:
 - Figure out how to get the most up-to-date Linux client for Satellaview+ in case of future updates. Current script downloads V5.
+- Compile SNES9x in an AMD64 environment, somehow.
