@@ -13,7 +13,7 @@ do
     str="$key='$val'"
     echo "$str"
 done)
-# End of stealing from StackOverflow
+# End of StackOverflow source
 
 # Check for Satellaview+
 if [ -e "$SCRIPT_DIR"/Satellaview+*.appimage ]
@@ -34,7 +34,6 @@ then
     echo "Found emulator at: $EMULATOR. Continuing."
 else
     echo "There does not appear to be an emulator at $EMULATOR."
-    sleep 3
     echo "Are you sure you've typed in the location correctly?"
     echo "Would you like to install SNES9x 1.63? [y/N]"
     read -n 1 ANSWER
@@ -67,12 +66,13 @@ echo "Booting up Satellaview+..."
 
 # Wait until bs-x.sfc is available.
 # If setup went correctly, Satellaview+ will download the RetroArch version, which includes the vaunted bs-x.sfc that's included into the satdata.
-# Using any other method will cause the program to delete BS-X.sfc everytime and allows us to not use RetroArch.
+# Using any other method will cause the program to delete BS-X.sfc everytime.
 until [ -e "$SCRIPT_DIR"/roms/bs-x/bs-x.sfc ]; do
     sleep 1
 done
 # Boot BS-X - Much more simpler.
+sleep 5
+# The sleep is deliberate for handheld PCs such as Steam Deck to ensure the emulator is the last thing opened to focus on, otherwise, Satellaview+ will be in focus.
 echo "Beginning boot up for BS-X..."
 cd "$SCRIPT_DIR"
-sleep 5
 "$EMULATOR" ./roms/bs-x/bs-x.sfc
